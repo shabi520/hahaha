@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>秘密基地入口</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffc0cb; /* 设置背景色为粉色 */
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff69b4; /* 文字颜色为粉色 */
+            margin-bottom: 20px;
+        }
+        #buttonContainer {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #ff69b4; /* 设置边框 */
+            border-radius: 10px; /* 圆角 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            background-color: #ffffff; /* 内部背景色 */
+        }
+        button {
+            font-size: 20px;
+            padding: 15px 30px;
+            color: #ffffff;
+            background-color: #ff69b4; /* 按钮背景色 */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* 过渡动画 */
+        }
+        button:hover {
+            background-color: #ff4500; /* 鼠标悬停时的颜色 */
+        }
+        #imageContainer {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>秘密基地</h1>
+    <div id="buttonContainer">
+        <button id="nextButton">点击进入下一步</button>
+    </div>
+    <div id="imageContainer">
+        <img src="https://gitee.com/angel0518/pages/raw/master/36dc32a7d31d63caca685685e29bd5f42b94e048.jpg" alt="1">
+    </div>
+
+    <script>
+        let count = 0;
+
+        const changeButtonText = () => {
+            switch(count) {
+                case 1:
+                    document.getElementById('nextButton').innerText = '再点一次';
+                    break;
+                case 2:
+                    document.getElementById('nextButton').innerText = '再点最后一次就好啦';
+                    break;
+                case 3:
+                    document.getElementById('nextButton').innerText = '马上就要成功了';
+                    break;
+                case 4:
+                    document.getElementById('nextButton').innerText = '这是最后一次点击';
+                    break;
+                default:
+                    document.getElementById('nextButton').innerText = '点击进入下一步';
+            }
+        };
+
+        document.getElementById('nextButton').addEventListener('click', function() {
+            count++;
+            if (count <= 5) {
+                changeButtonText();
+                if (count === 5) {
+                    document.getElementById('imageContainer').style.display = 'block';
+                    this.style.display = 'none'; // 按钮消失
+                }
+            } else {
+                // 如果超过了5次点击，可以重置计数器或做其他处理
+                count = 1; // 重置计数器以便重新开始
+                changeButtonText();
+                this.style.display = 'block'; // 如果之前隐藏了按钮，则恢复显示
+            }
+        });
+    </script>
+</body>
+</html>
